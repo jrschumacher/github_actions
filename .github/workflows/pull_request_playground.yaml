@@ -1,5 +1,9 @@
 name: pull_request_playground
 
+permissions:
+  contents: read
+  issues: write
+
 on:
   pull_request:
     branches:
