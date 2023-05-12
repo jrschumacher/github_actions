@@ -16,7 +16,7 @@ jobs:
     - uses: actions/github-script@v6
       with:
         script: |
-          console.log(context.event)
+          console.log(context.payload)
 
           const isPR = context.payload.pull_request || context.payload.issues.pull_request
           await github.rest.createComment({
@@ -24,8 +24,8 @@ jobs:
             owner: context.repo.owner,
             issue_number: context.issue.number,
             body: `
-              event-name: ${context.event_name}
-              action: ${context.event.action}
+              event-name: ${context.eventName}
+              action: ${context.action}
               pull_request: ${isPR ? 'Yes' : 'No'}
             `
           })
