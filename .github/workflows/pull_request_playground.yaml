@@ -29,7 +29,7 @@ jobs:
             issue_number: context.issue.number,
             body: `
               event-name: ${context.eventName}
-              action: ${context.action}
+              action: ${context.payload.action}
               pull_request: ${isPR ? 'Yes' : 'No'}
             `
           })
