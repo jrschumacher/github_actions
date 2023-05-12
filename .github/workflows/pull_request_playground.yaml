@@ -18,7 +18,7 @@ jobs:
         script: |
           console.log(context.payload)
 
-          const isPR = context.payload.pull_request || context.payload.issues.pull_request
+          const isPR = context.payload.pull_request || context.payload.issue.pull_request
           await github.rest.createComment({
             repo: context.repo.repo,
             owner: context.repo.owner,
