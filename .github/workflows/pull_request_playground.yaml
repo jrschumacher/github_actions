@@ -1,0 +1,28 @@
+name: pull_request_playground
+
+on:
+  pull_request:
+    branches:
+    - main
+  issues:
+    types:
+    - opened
+    - edited
+
+jobs:
+  test_edit_body:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/github-script@v6
+      with:
+        script: |
+          await github.rest.createComment({
+            repo: context.repo.repo,
+            owner: context.repo.owner,
+            issue_number: context.issue.number,
+            body: `
+              event: ${context.event_name}
+              action: ${context.event.payload.action}
+              pull_request: ${!!context.event.payload.pull_request}
+            `
+          })
