@@ -10,18 +10,31 @@ async function createJiraTicket(issue) {
   const data = await jiraClient.addNewIssue({
     fields: {
       project: {
-        key: 'TEST'
+        key: 'TEST',
       },
       summary: issue.title,
-      description: issue.body,
+      description: {
+        content: [
+          {
+            content: [
+              {
+                text: issue.body,
+                type: 'text',
+              },
+            ],
+            type: 'paragraph',
+          },
+        ],
+        type: 'doc',
+        version: 1,
+      },
       issuetype: {
-        name: 'Story'
-      }
-    }
-  })
+        id: '10000',
+      },
+    },
+  });
   console.log(`Jira ticket created: ${data.key}`);
 }
-
 
 export default async function main({ config, context, core, github }) {
   jiraClient = new JiraApi({
@@ -30,7 +43,7 @@ export default async function main({ config, context, core, github }) {
     username: config.jiraUsername,
     password: config.jiraPassword,
     apiVersion: '3',
-    strictSSL: true
+    strictSSL: true,
   });
 
   // if the action is triggered by an issue
