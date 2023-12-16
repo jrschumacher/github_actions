@@ -1,6 +1,7 @@
 import JiraApi from 'jira-client';
 
 let jiraClient;
+let githubClient;
 
 // Update Jira ticket
 
@@ -34,9 +35,29 @@ async function createJiraTicket(issue) {
     },
   });
   console.log(`Jira ticket created: ${data.key}`);
+
+  // add a comment to the issue linking to the Jira ticket
+  await githubClient.addComment(`Linked to Jira issue [${data.key}](https://${config.jiraHost}/browse/${data.key}))`);
 }
 
 export default async function main({ config, context, core, github }) {
+  // create partial appication that set
+  githubClient = {
+    github,
+    addComment: async (body) => {
+      if (!context.issue) {
+        throw new Error('context.issue is undefined');
+      }
+      // add comment to this github issue
+      await github.rest.issues.createComment({
+        issue_number: context.issue.number,
+        owner: context.repo.owner,
+        repo: context.repo.repo,
+        body
+      })
+    }
+  }
+
   jiraClient = new JiraApi({
     protocol: 'https',
     host: config.jiraHost,
