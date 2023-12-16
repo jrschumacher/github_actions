@@ -1,5 +1,7 @@
 import JiraApi from 'jira-client';
 
+let jiraClient;
+
 // Update Jira ticket
 
 // Create a Jira ticket
