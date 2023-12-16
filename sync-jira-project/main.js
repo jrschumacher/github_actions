@@ -5,7 +5,7 @@ const JiraApi = require('jira-client');
 // Create a Jira ticket
 async function createJiraTicket(issue) {
   console.log('Creating Jira ticket...', issue);
-  const issue = await jiraClient.addNewIssue({
+  const data = await jiraClient.addNewIssue({
     fields: {
       project: {
         key: 'TEST'
@@ -17,7 +17,7 @@ async function createJiraTicket(issue) {
       }
     }
   })
-  console.log(`Jira ticket created: ${issue.key}`);
+  console.log(`Jira ticket created: ${data.key}`);
 }
 
 
