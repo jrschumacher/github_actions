@@ -33,8 +33,8 @@ jobs:
           const { default: syncJiraProject } = await import('${{ github.workspace }}/sync-jira-project/main.js')
 
           const config = {
-            jiraHost: '${{ env.JIRA_HOST }}',
-            jiraUsername: '${{ env.JIRA_USERNAME }}',
+            jiraHost: '${{ vars.JIRA_HOST }}',
+            jiraUsername: '${{ vars.JIRA_USERNAME }}',
             jiraPassword: '${{ secrets.JIRA_API_KEY }}',
           }
 

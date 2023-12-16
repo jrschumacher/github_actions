@@ -26,7 +26,7 @@ jobs:
           const isPR = context.payload.pull_request || context.payload.issue.pull_request
           await github.rest.issues.createComment({
             env: ${{ toJSON(env) }}
-            processEnv: process.env,
+            vars: ${{ toJSON(vars) }},
             repo: context.repo.repo,
             owner: context.repo.owner,
             issue_number: context.issue.number,
