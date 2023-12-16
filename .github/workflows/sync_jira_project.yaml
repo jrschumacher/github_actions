@@ -1,0 +1,42 @@
+name: 🔄 Sync Jira Project
+
+permissions:
+  contents: read
+  issues: write
+
+on:
+  pull_request:
+    branches:
+    - main
+  issues:
+    types:
+    - opened
+    - edited
+    - closed
+    - reopened
+    - labeled
+    - unlabeled
+
+jobs:
+  test_edit_body:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+    - run: npm ci
+    # or one-off:
+    - run: npm install execa
+    - uses: actions/github-script@v6
+      with:
+        script: |
+          const { default: syncJiraProject } = await import('${{ github.workspace }}/sync-jira-project/main.js')
+
+          const config = {
+            jiraHost: '${{ env.JIRA_HOST }}',
+            jiraUsername: '${{ env.JIRA_USERNAME }}',
+            jiraPassword: '${{ secrets.JIRA_API_KEY }}',
+          }
+
+          syncJiraProject({ jira, github, context, core, options })
