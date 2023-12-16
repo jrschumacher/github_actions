@@ -38,4 +38,4 @@ jobs:
             jiraPassword: '${{ secrets.JIRA_API_KEY }}',
           }
 
-          syncJiraProject({ config, github, context, core, options })
+          syncJiraProject({ config, github, context, core })
