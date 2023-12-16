@@ -1,4 +1,4 @@
-const JiraApi = require('jira-client');
+import JiraApi from 'jira-client';
 
 // Update Jira ticket
 
