@@ -13,6 +13,9 @@ async function createJiraTicket(issue) {
       project: {
         key: 'TEST',
       },
+      issuetype: {
+        id: '10009',
+      },
       summary: issue.title,
       description: {
         content: [
@@ -28,9 +31,6 @@ async function createJiraTicket(issue) {
         ],
         type: 'doc',
         version: 1,
-      },
-      issuetype: {
-        id: '10000',
       },
     },
   });
