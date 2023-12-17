@@ -6,8 +6,9 @@ let githubClient;
 // Update Jira ticket
 
 // Create a Jira ticket
-async function createJiraTicket(issue) {
+async function createJiraTicket({ context, config }) {
   console.log('Creating Jira ticket...', issue);
+  const issue = context.payload.issue
   const data = await jiraClient.addNewIssue({
     fields: {
       project: {
@@ -40,7 +41,8 @@ async function createJiraTicket(issue) {
   await githubClient.addComment(`Linked to Jira issue [${data.key}](https://${config.jiraHost}/browse/${data.key}))`);
 }
 
-export default async function main({ config, context, core, github }) {
+export default async function main(args) {
+  const { context, github, config } = args;
   // create partial appication that set
   githubClient = {
     github,
@@ -76,7 +78,7 @@ export default async function main({ config, context, core, github }) {
     switch (context.payload.action) {
       // create a Jira ticket
       case 'opened':
-        await createJiraTicket(context.payload.issue);
+        await createJiraTicket(args);
         break;
       // create a Jira ticket
       case 'reopened':
