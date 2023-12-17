@@ -43,6 +43,12 @@ async function createJiraTicket({ context, config }) {
 
 export default async function main(args) {
   const { context, github, config } = args;
+
+  // ignore PR events
+  if (context.payload.issue.pull_request) {
+    return;
+  }
+
   // create partial appication that set
   githubClient = {
     github,

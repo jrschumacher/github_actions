@@ -25,7 +25,8 @@ The Github flow is:
   - Completed
   - Not Planned
 
-
+Since there is no direct mapping between the two, the action will support a mapping of the Github states to the Jira
+states. This will allow the action to be used in a workflow to move an issue from one state to another.
 
 ### Jira Transitions
 
@@ -61,3 +62,4 @@ Jira --> Github
 - Add a comment to the Github issue when the Jira issue is commented on
 - Add a comment to the Jira issue when the Github issue is commented on
 - Sync with Github project board state
+  - This will enable G
