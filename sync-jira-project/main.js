@@ -23,7 +23,7 @@ async function createJiraTicket({ context, config }) {
           {
             content: [
               {
-                text: issue.body,
+                text: issue.body || '',
                 type: 'text',
               },
             ],
