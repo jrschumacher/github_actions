@@ -38,7 +38,7 @@ async function createJiraTicket({ context, config }) {
   console.log(`Jira ticket created: ${data.key}`);
 
   // add a comment to the issue linking to the Jira ticket
-  await githubClient.addComment(`Linked to Jira issue [${data.key}](https://${config.jiraHost}/browse/${data.key}))`);
+  await githubClient.addComment(`Linked to Jira issue [${data.key}](https://${config.jiraHost}/browse/${data.key})`);
 }
 
 export default async function main(args) {
