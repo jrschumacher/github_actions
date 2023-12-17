@@ -17,6 +17,7 @@ on:
 jobs:
   test_edit_body:
     runs-on: ubuntu-latest
+    if: github.event.label.name == 'playground'
     steps:
     - uses: actions/github-script@v6
       with:

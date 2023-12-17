@@ -5,9 +5,6 @@ permissions:
   issues: write
 
 on:
-  pull_request:
-    branches:
-    - main
   issues:
     types:
     - opened
@@ -30,7 +27,7 @@ jobs:
     - uses: actions/github-script@v6
       with:
         script: |
-          const { default: syncJiraProject } = await import('${{ github.workspace }}/sync-jira-project/main.js')
+          const { default: syncJiraProject } = await import('${{ github.workspace }}/sync-jira-issues/main.js')
 
           const config = {
             jiraHost: '${{ vars.JIRA_HOST }}',
