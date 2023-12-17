@@ -7,8 +7,8 @@ let githubClient;
 
 // Create a Jira ticket
 async function createJiraTicket({ context, config }) {
-  console.log('Creating Jira ticket...', issue);
   const issue = context.payload.issue
+  console.log('Creating Jira ticket...', issue);
   const data = await jiraClient.addNewIssue({
     fields: {
       project: {
