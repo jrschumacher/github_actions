@@ -9,7 +9,7 @@ jobs:
   message:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Testing dynamic matrix https://docs.github.com/en/actions/learn-github-actions/expressions#fromjson" >> $GITHUB_OUTPUT
+      - run: echo "Testing dynamic matrix https://docs.github.com/en/actions/learn-github-actions/expressions#fromjson"
   job1:
     runs-on: ubuntu-latest
     outputs:
